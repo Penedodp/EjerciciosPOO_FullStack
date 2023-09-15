@@ -1,4 +1,4 @@
-package com.campudual.ejercicio5;
+package com.campudual.ejercicioAnton;
 
 //--Teniendo en cuenta el programa anterior(ejercicio4):
 //--Realiza los cambios necesarios para:
@@ -15,7 +15,7 @@ package com.campudual.ejercicio5;
 //      3- Asignar una dieta: Muestra la lista de dietas general y puede asignarle una a un día de la semana del paciente.
 //      4- Dar de baja un paciente: Elimina los datos de un paciente(No borra sus dietas asignadas dado que pueden estar asignadas a otro paciente)
 
-public class  Menu {
+public class Menu {
     public static void main(String[] args) {
         DietProgram program = new DietProgram();
         program.showMenuProgram();
