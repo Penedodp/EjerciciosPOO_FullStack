@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Ejercicio2 {
     public static void main(String[] args) {
-        Integer year ;
+        Integer year;
         System.out.println("Escriba un año");
         Scanner teclado = new Scanner(System.in);
         year = teclado.nextInt();
@@ -15,9 +15,11 @@ public class Ejercicio2 {
         } else {
             System.out.println("El año no es bisiesto");
         }
+
     }
 
     public static boolean esBisiesto(int year) {
         return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
     }
+
 }
