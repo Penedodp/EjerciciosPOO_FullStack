@@ -8,7 +8,7 @@ public class Customer {
     private Integer weight;
     private Integer height;
     private Integer age;
-    private String gender;
+    private Genre genre;
 
     public Customer() {
     }
@@ -19,15 +19,18 @@ public class Customer {
         this.weight = weight;
         this.height = height;
         this.age = age;
-        this.gender = gender;
+        this.genre = genre;
     }
+
+
+
     public void showCustomerDetails() {
         System.out.println("Nombre: " + this.name );
         System.out.println("Apellido: " + this.surname);
         System.out.println("Peso: " + this.weight);
         System.out.println("Altura: " + this.height + " cm");
         System.out.println("Edad: " + this.age + " años");
-        System.out.println("Género: " + this.gender);
+        System.out.println("Género: " + this.genre);
     }
 
     @Override
@@ -74,12 +77,16 @@ public class Customer {
     public void setAge(Integer age) {
         this.age = age;
     }
-
-    public String getGender() {
-        return gender;
+    public void setHeight(Integer height) {
+        this.height = height;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public Genre getGenre() {
+        return genre;
     }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
+
 }
