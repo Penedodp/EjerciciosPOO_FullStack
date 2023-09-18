@@ -1,11 +1,11 @@
 package com.campudual.ejercicioAnton;
 
 
-
 import com.campudual.ejercicioAnton.exceptions.*;
 
 import java.util.ArrayList;
 import java.util.List;
+
 public class Diet {
 
     public static final String OK = "OK";
@@ -22,31 +22,31 @@ public class Diet {
     private List<Intake> intakes;
     private String dietName;
 
-    public Diet(String dietName){
+    public Diet(String dietName) {
         this.intakes = new ArrayList<>();
         this.dietName = dietName;
     }
 
-    public Diet(String dietName,Integer maxCalories){
-        this.maxCalories=maxCalories;
+    public Diet(String dietName, Integer maxCalories) {
+        this.maxCalories = maxCalories;
         this.intakes = new ArrayList<>();
         this.dietName = dietName;
     }
 
-    public Diet(String dietName,Integer maxFats, Integer maxCarbs, Integer maxProteins){
+    public Diet(String dietName, Integer maxFats, Integer maxCarbs, Integer maxProteins) {
         this.dietName = dietName;
-        this.maxCarbs=maxCarbs;
-        this.maxFats=maxFats;
-        this.maxProteins=maxProteins;
+        this.maxCarbs = maxCarbs;
+        this.maxFats = maxFats;
+        this.maxProteins = maxProteins;
         this.intakes = new ArrayList<>();
 
     }
 
-    public Diet(String dietName,Genre genreName, Integer age, Integer height, Integer weight){
-        if(Genre.FEMALE == genreName){
-            maxCalories = (int) ((10*weight) + (6.25*height))-(5*age)-161;
-        }else{
-            maxCalories = (int) ((10*weight) + (6.25*height))-(5*age)+5;
+    public Diet(String dietName, Genre genreName, Integer age, Integer height, Integer weight) {
+        if (Genre.FEMALE == genreName) {
+            maxCalories = (int) ((10 * weight) + (6.25 * height)) - (5 * age) - 161;
+        } else {
+            maxCalories = (int) ((10 * weight) + (6.25 * height)) - (5 * age) + 5;
         }
         this.intakes = new ArrayList<>();
         this.dietName = dietName;
@@ -54,84 +54,84 @@ public class Diet {
 
 
     public void addFood(Food food, Integer grams) throws MaxValuedReachedException {
-        Intake intake = new Intake(food,grams);
+        Intake intake = new Intake(food, grams);
         String validation = isValidIntake(intake);
-        if(OK.equalsIgnoreCase(validation)){
+        if (OK.equalsIgnoreCase(validation)) {
             intakes.add(intake);
-        }else{
-            if(MAX_CALORIES_REBASE.equalsIgnoreCase(validation)){
+        } else {
+            if (MAX_CALORIES_REBASE.equalsIgnoreCase(validation)) {
                 throw new MaxCaloriesReachedException();
             }
-            if(MAX_CARBS_REBASE.equalsIgnoreCase(validation)){
+            if (MAX_CARBS_REBASE.equalsIgnoreCase(validation)) {
                 throw new MaxCarbsReachedException();
             }
-            if(MAX_FATS_REBASE.equalsIgnoreCase(validation)){
+            if (MAX_FATS_REBASE.equalsIgnoreCase(validation)) {
                 throw new MaxFatsReachedException();
             }
-            if(MAX_PROTEINS_REBASE.equalsIgnoreCase(validation)){
+            if (MAX_PROTEINS_REBASE.equalsIgnoreCase(validation)) {
                 throw new MaxProteinsReachedException();
             }
         }
     }
 
-    private String isValidIntake(Intake intake){
+    private String isValidIntake(Intake intake) {
         Integer actualCaories = getTotalCalories();
-        if(this.maxCalories != null && this.maxCalories < (actualCaories + intake.calculatedCalories())){
+        if (this.maxCalories != null && this.maxCalories < (actualCaories + intake.calculatedCalories())) {
             return MAX_CALORIES_REBASE;
         }
         Integer actualCarbs = getTotalCarbs();
-        if(this.maxCarbs != null && this.maxCarbs < actualCarbs + intake.calculatedCarbos()){
+        if (this.maxCarbs != null && this.maxCarbs < actualCarbs + intake.calculatedCarbos()) {
             return MAX_CARBS_REBASE;
         }
         Integer actualFats = getTotalFats();
 
-        if(this.maxFats != null && this.maxFats < actualFats + intake.calculatedFats()){
+        if (this.maxFats != null && this.maxFats < actualFats + intake.calculatedFats()) {
             return MAX_FATS_REBASE;
         }
         Integer actualProteins = getTotalProteins();
-        if(this.maxProteins != null && this.maxProteins < actualProteins + intake.calculatedProteins()){
+        if (this.maxProteins != null && this.maxProteins < actualProteins + intake.calculatedProteins()) {
             return MAX_PROTEINS_REBASE;
         }
         return OK;
     }
 
-	public Integer getTotalCalories(){
+    public Integer getTotalCalories() {
         Integer totalCalories = 0;
-        for(Intake intake:intakes){
-            totalCalories = totalCalories+ intake.calculatedCalories();
+        for (Intake intake : intakes) {
+            totalCalories = totalCalories + intake.calculatedCalories();
         }
         return totalCalories;
     }
 
-	public Integer getTotalCarbs(){
+    public Integer getTotalCarbs() {
         Integer totalCarbs = 0;
-        for(Intake intake:intakes){
+        for (Intake intake : intakes) {
             totalCarbs = totalCarbs + intake.calculatedCarbos();
         }
         return totalCarbs;
     }
 
-	public Integer getTotalFats(){
+    public Integer getTotalFats() {
         Integer totalFats = 0;
-        for(Intake intake:intakes){
+        for (Intake intake : intakes) {
             totalFats = totalFats + intake.calculatedFats();
         }
         return totalFats;
     }
 
-	public Integer getTotalProteins(){
+    public Integer getTotalProteins() {
         Integer totalProtein = 0;
-        for(Intake intake: intakes){
+        for (Intake intake : intakes) {
             totalProtein = totalProtein + intake.calculatedProteins();
         }
         return totalProtein;
     }
 
-    public Integer getFoodNumber(){
+    public Integer getFoodNumber() {
         return intakes.size();
     }
 
-    public Integer getMaxCalories(){
+    public Integer getMaxCalories() {
         return maxCalories;
     }
 
@@ -178,15 +178,16 @@ public class Diet {
     public void setDietName(String dietName) {
         this.dietName = dietName;
     }
-    public String getDietIntakes(){
+
+    public String getDietIntakes() {
         String result = "";
-        boolean first=true;
-        for(Intake intake:intakes){
-            if(first){
+        boolean first = true;
+        for (Intake intake : intakes) {
+            if (first) {
                 first = false;
-                result = intake.getName()+":"+intake.getGrams();
-            }else{
-                result = result + ", "+intake.getName()+":"+intake.getGrams();
+                result = intake.getName() + ":" + intake.getGrams();
+            } else {
+                result = result + ", " + intake.getName() + ":" + intake.getGrams();
             }
         }
         return result;

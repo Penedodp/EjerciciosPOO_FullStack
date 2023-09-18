@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.campudual.ejercicioAnton.Kb.getOption;
+
 public class DietProgram {
 
     public static final String MAXCALORIES = "maxcalories";
@@ -58,7 +59,7 @@ public class DietProgram {
                                 deleteDiet();
                                 break;
                         }
-                    } while (option != 4);
+                    } while (option != 3);
                     break;
                 case 2:
                     customerManager();
@@ -67,12 +68,13 @@ public class DietProgram {
                     System.out.println("Gracias por usar el programa, hasta pronto :)");
                     break;
             }
-        } while (option != 3);
+        } while (option != 4);
     }
+
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     //Sección de Pacientes
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    private void customerManager() {
+    public void customerManager() {
         System.out.println("######################################");
         System.out.println("######## Gestión de Pacientes ########");
         System.out.println("######################################");
@@ -83,7 +85,7 @@ public class DietProgram {
             System.out.println("1-Lista de pacientes");
             System.out.println("2-Nuevo paciente");
             System.out.println("3-Salir");
-            option = getOption(1, 3);
+            option = Kb.getOption(1, 3);
             switch (option) {
                 case 1:
                     showPatientList();
@@ -102,7 +104,7 @@ public class DietProgram {
         Integer i;
         if (customerList.isEmpty()) {
             System.out.println("La lista de pacientes está vacía, prueba a crear uno nuevo");
-        }else {
+        } else {
             System.out.println("Lista de pacientes");
             for (i = 0; i < customerList.size(); i++) {
                 System.out.println(i + " - " + customerList.get(i));
@@ -110,7 +112,7 @@ public class DietProgram {
 
             System.out.println("Escriba un número para elegir un paciente");
             System.out.println("===================================");
-            Integer customerIndex = Kb.getOption(0, i-1);
+            Integer customerIndex = Kb.getOption(0, i - 1);
             activeCustomer = customerList.get(customerIndex);
             System.out.println("===================================");
             System.out.println("Su paciente elegido es: " + activeCustomer.getName() + " " + activeCustomer.getSurname());
@@ -130,7 +132,7 @@ public class DietProgram {
         String gender = Kb.nextLine("Género (mujer/hombre):");
         Customer patient = new Customer(name, surname, weight, height, age, gender);
         customerList.add(patient);
-        System.out.println("Se ha creado el cliente: " + name + " " + surname );
+        System.out.println("Se ha creado el cliente: " + name + " " + surname);
         activeCustomer = patient;
         activeCustomerMenu();
     }
@@ -140,32 +142,32 @@ public class DietProgram {
         System.out.println("############ Paciente Actual #############");
         System.out.println("##########################################");
         Integer option;
-            System.out.println("Escriba una opción para :");
-            System.out.println( activeCustomer.getName() + " " + activeCustomer.getSurname() );
-            System.out.println("===================================");
-            System.out.println("1-Detalles del paciente");
-            System.out.println("2-Asignar dieta al paciente");
-            System.out.println("3-Dar de baja al paciente");
-            System.out.println("4-Salir");
-            option = getOption(1, 4);
-            switch (option) {
-                case 1:
-                    activeCustomer.showCustomerDetails();
-                    break;
-                case 2:
-                    //todo hacer este método funcional
-                    asignDietToPatient();
-                    break;
-                case 3:
-                    if  (customerList.remove(activeCustomer)){
-                        System.out.println("Se ha eliminado a " + activeCustomer.getName() + " " + activeCustomer.getSurname() + " de la lista de pacientes");
-                        activeCustomer = null;
-                    }
-                    break;
-                case 4:
-                    System.out.println("Saliendo de Gestión de pacientes");
-                    break;
-            }
+        System.out.println("Escriba una opción para :");
+        System.out.println(activeCustomer.getName() + " " + activeCustomer.getSurname());
+        System.out.println("===================================");
+        System.out.println("1-Detalles del paciente");
+        System.out.println("2-Asignar dieta al paciente");
+        System.out.println("3-Dar de baja al paciente");
+        System.out.println("4-Salir");
+        option = getOption(1, 4);
+        switch (option) {
+            case 1:
+                activeCustomer.showCustomerDetails();
+                break;
+            case 2:
+                //todo hacer este método funcional
+                asignDietToPatient();
+                break;
+            case 3:
+                if (customerList.remove(activeCustomer)) {
+                    System.out.println("Se ha eliminado a " + activeCustomer.getName() + " " + activeCustomer.getSurname() + " de la lista de pacientes");
+                    activeCustomer = null;
+                }
+                break;
+            case 4:
+                System.out.println("Saliendo de Gestión de pacientes");
+                break;
+        }
     }
 
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -201,7 +203,7 @@ public class DietProgram {
                     break;
                 case 3:
                     System.out.println("Esto elimina dietas");
-                   // deleteDiet();
+                    // deleteDiet();
                     break;
                 case 4:
                     System.out.println("Saliendo de Gestión de dietas");
@@ -210,7 +212,6 @@ public class DietProgram {
         } while (option != 4);
     }
 
-  
 
     private void editDiet() {
         System.out.println("Escoja una dieta a modificar:");
@@ -255,6 +256,7 @@ public class DietProgram {
             } while (option != 6);
         }
     }
+
     private void createDiet() {
         System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
         System.out.println("Crear/reiniciar dieta");
@@ -304,7 +306,7 @@ public class DietProgram {
                 Integer age = Kb.forceNextInt();
                 System.out.println("Mujer u Hombre(m/h):");
                 String sexCharacter = Kb.nextLine();
-                this.diet = new Diet("Sexdiet",Genre.getByString(sexCharacter) , age, height, weight);
+                this.diet = new Diet("Sexdiet", Genre.getByString(sexCharacter), age, height, weight);
                 System.out.println("Se ha creado una dieta de " + this.diet.getMaxCalories() + " calorías máximas");
                 break;
         }
@@ -334,6 +336,7 @@ public class DietProgram {
             }
         }
     }
+
     private Diet getSelectedDiet() {
         System.out.println("Lista de dietas");
         for (int i = 0; i < dietList.size(); i++) {
@@ -493,7 +496,6 @@ public class DietProgram {
     }*/
 
 
-
     private void showDetailsMenu(Diet showdiet) {
         if (showdiet != null) {
             System.out.println("████████████████████████████████████");
@@ -505,6 +507,7 @@ public class DietProgram {
             if (showdiet.getMaxCarbs() != null || showdiet.getMaxFats() != null || showdiet.getMaxProteins() != null) {
                 System.out.println("Los valores máximos de macronutrientes son: Carbohidratos:" + showdiet.getMaxCarbs() + " , Grasas:" + showdiet.getMaxFats() + " , Proteinas:" + showdiet.getMaxProteins());
             }
+            System.out.println("Dieta:" + showdiet.getDietName());
             System.out.println("Número de alimentos de la dieta:" + showdiet.getFoodNumber());
             System.out.println("Calorías:" + showdiet.getTotalCalories());
             System.out.println("Carbohidratos:" + showdiet.getTotalCarbs());
